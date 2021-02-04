@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:campus_mobile_experimental/app_constants.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 class NetworkHelper {
   ///TODO: inside each service that file place a switch statement to handle all
@@ -9,11 +10,18 @@ class NetworkHelper {
   const NetworkHelper();
 
   Future<dynamic> fetchData(String url) async {
+    var reqId = UniqueKey().toString();
+    print('Network:fetchData: ' + url + ' (' + reqId + ')');
     Dio dio = new Dio();
     dio.options.connectTimeout = 20000;
     dio.options.receiveTimeout = 20000;
     dio.options.responseType = ResponseType.plain;
     final _response = await dio.get(url);
+    print('Network:fetchData: Response statusCode ' +
+        _response.statusCode.toString() +
+        ' (reqId: ' +
+        reqId +
+        ')');
 
     if (_response.statusCode == 200) {
       // If server returns an OK response, return the body
@@ -27,14 +35,24 @@ class NetworkHelper {
 
   Future<dynamic> authorizedFetch(
       String url, Map<String, String> headers) async {
+    var reqId = UniqueKey().toString();
+    if (url.contains('campusevents')) {
+      print('Network:authorizedFetch: ' + url + ' (' + reqId + ')');
+    }
     Dio dio = new Dio();
     dio.options.connectTimeout = 20000;
     dio.options.receiveTimeout = 20000;
     dio.options.responseType = ResponseType.plain;
     dio.options.headers = headers;
-    final _response = await dio.get(
-      url,
-    );
+    final _response = await dio.get(url);
+    if (url.contains('campusevents')) {
+      print('Network:authorizedFetch: Response statusCode ' +
+          _response.statusCode.toString() +
+          ' (reqId: ' +
+          reqId +
+          ')');
+    }
+
     if (_response.statusCode == 200) {
       // If server returns an OK response, return the body
       return _response.data;
@@ -48,11 +66,19 @@ class NetworkHelper {
 
   Future<dynamic> authorizedPost(
       String url, Map<String, String> headers, dynamic body) async {
+    var reqId = UniqueKey().toString();
+    print('Network:authorizedPost: ' + url + ' (' + reqId + ')');
     Dio dio = new Dio();
     dio.options.connectTimeout = 20000;
     dio.options.receiveTimeout = 20000;
     dio.options.headers = headers;
     final _response = await dio.post(url, data: body);
+    print('Network:authorizedPost: Response statusCode ' +
+        _response.statusCode.toString() +
+        ' (reqId: ' +
+        reqId +
+        ')');
+
     if (_response.statusCode == 200 || _response.statusCode == 201) {
       // If server returns an OK response, return the body
       return _response.data;
@@ -79,12 +105,19 @@ class NetworkHelper {
 
   Future<dynamic> authorizedPut(
       String url, Map<String, String> headers, dynamic body) async {
+    var reqId = UniqueKey().toString();
+    print('Network:authorizedPut: ' + url + ' (' + reqId + ')');
+    print(body);
     Dio dio = new Dio();
     dio.options.connectTimeout = 20000;
     dio.options.receiveTimeout = 20000;
     dio.options.headers = headers;
     final _response = await dio.put(url, data: body);
-    // print('response in networking' + _response.data);
+    print('Network:authorizedPut: Response statusCode ' +
+        _response.statusCode.toString() +
+        ' (reqId: ' +
+        reqId +
+        ')');
 
     if (_response.statusCode == 200 || _response.statusCode == 201) {
       // If server returns an OK response, return the body
@@ -109,12 +142,20 @@ class NetworkHelper {
 
   Future<dynamic> authorizedDelete(
       String url, Map<String, String> headers) async {
+    var reqId = UniqueKey().toString();
+    print('Network:authorizedDelete: ' + url + ' (' + reqId + ')');
     Dio dio = new Dio();
     dio.options.connectTimeout = 20000;
     dio.options.receiveTimeout = 20000;
     dio.options.headers = headers;
     try {
       final _response = await dio.delete(url);
+      print('Network:authorizedDelete: Response statusCode ' +
+          _response.statusCode.toString() +
+          ' (reqId: ' +
+          reqId +
+          ')');
+
       if (_response.statusCode == 200) {
         // If server returns an OK response, return the body
         return _response.data;

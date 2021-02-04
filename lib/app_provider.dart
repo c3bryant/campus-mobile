@@ -25,6 +25,8 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import 'core/providers/public_data.dart';
+
 List<SingleChildWidget> providers = [
   ...independentServices,
   ...dependentServices,
@@ -261,6 +263,19 @@ List<SingleChildWidget> dependentServices = [
       messageDataProvider.userDataProvider = userDataProvider;
       messageDataProvider.fetchMessages(true);
       return messageDataProvider;
+    },
+  ),
+  ChangeNotifierProxyProvider<FreeFoodDataProvider, PublicDataProvider>(
+    create: (_) {
+      print("CreateProvider: PublicDataProvider");
+      var publicDataProvider = PublicDataProvider();
+      publicDataProvider.getAccessToken();
+      return publicDataProvider;
+    },
+    update: (_, freefoodDataProvider, publicDataProvider) {
+      print("UpdateProvider: PublicDataProvider");
+      publicDataProvider.getAccessToken();
+      return publicDataProvider;
     },
   ),
   ChangeNotifierProxyProvider<MessagesDataProvider, FreeFoodDataProvider>(
