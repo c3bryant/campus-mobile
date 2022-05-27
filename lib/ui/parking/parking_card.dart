@@ -93,7 +93,6 @@ class _ParkingCardState extends State<ParkingCard> {
         ],
       );
     } catch (e) {
-      print(e);
       return Container(
         width: double.infinity,
         child: Center(

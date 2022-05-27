@@ -1,22 +1,23 @@
 import 'package:campus_mobile_experimental/app_constants.dart';
 import 'package:campus_mobile_experimental/core/providers/bottom_nav.dart';
+import 'package:campus_mobile_experimental/core/providers/cards.dart';
 import 'package:campus_mobile_experimental/core/providers/scanner.dart';
 import 'package:campus_mobile_experimental/core/providers/scanner_message.dart';
 import 'package:campus_mobile_experimental/core/providers/user.dart';
 import 'package:campus_mobile_experimental/ui/common/card_container.dart';
 import 'package:campus_mobile_experimental/ui/navigator/top.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
-const String cardId = 'NativeScanner';
+const String cardId = 'scanner';
 
 class NativeScannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardContainer(
-      active: true,
-      hide: () => null,
+      active: Provider.of<CardsDataProvider>(context).cardStates![cardId],
+      hide: () => Provider.of<CardsDataProvider>(context, listen: false)
+          .toggleCard(cardId),
       reload: () =>
           Provider.of<ScannerMessageDataProvider>(context, listen: false)
               .fetchData(),
@@ -25,7 +26,6 @@ class NativeScannerCard extends StatelessWidget {
       errorText: null,
       child: () => buildCardContent(context),
       actionButtons: [buildActionButton(context)],
-      hideMenu: false,
     );
   }
 

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 const String cardId = 'events';
+
 //edit these files
 class EventsCard extends StatelessWidget {
   Widget buildEventsCard(List<EventModel>? data) {

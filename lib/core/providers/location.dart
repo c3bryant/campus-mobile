@@ -9,7 +9,7 @@ class LocationDataProvider extends ChangeNotifier {
   String? error;
 
   StreamController<Coordinates> _locationController =
-  StreamController<Coordinates>.broadcast();
+      StreamController<Coordinates>.broadcast();
   Stream<Coordinates> get locationStream => _locationController.stream;
 
   Location get locationObject => location;

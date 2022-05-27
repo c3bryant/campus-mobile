@@ -42,7 +42,7 @@ class AuthenticationService {
     } catch (e) {
       ///TODO: handle errors thrown by the network class for different types of error responses
       _error = e.toString();
-      print("authentication error:" + _error!);
+      print(_error!);
       return false;
     }
   }
@@ -73,7 +73,7 @@ class AuthenticationService {
     } catch (e) {
       ///TODO: handle errors thrown by the network class for different types of error responses
       _error = e.toString();
-      print("authentication error:" + _error!);
+      print(_error!);
       return false;
     }
   }

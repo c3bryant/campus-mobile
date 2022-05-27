@@ -45,7 +45,6 @@ class EventTime extends StatelessWidget {
         }
       }
     } catch (e) {
-      print(e);
       return Container();
     }
   }

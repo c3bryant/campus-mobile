@@ -27,19 +27,23 @@ class _CardsViewState extends State<CardsView> {
       onReorder: _onReorder,
     );
 
-    if( _cardsDataProvider!.noInternet! ) {
-      Future.delayed(Duration.zero, () => {
-        showDialog(context: context, builder: (BuildContext ctx) => AlertDialog(
-            title: const Text('No Internet'),
-            content: const Text('Cards requires an internet connection.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Ok'),
-                child: const Text('Ok'),
-              ),
-            ]
-        ))
-      });
+    if (_cardsDataProvider!.noInternet!) {
+      Future.delayed(
+          Duration.zero,
+          () => {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) => AlertDialog(
+                            title: const Text('No Internet'),
+                            content: const Text(
+                                'Cards requires an internet connection.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'Ok'),
+                                child: const Text('Ok'),
+                              ),
+                            ]))
+              });
     }
 
     return tempView;
@@ -51,9 +55,6 @@ class _CardsViewState extends State<CardsView> {
     }
     List<String> newOrder = _cardsDataProvider!.cardOrder!;
     List<String> toRemove = [];
-    if (_cardsDataProvider!.cardOrder!.contains('NativeScanner')) {
-      toRemove.add('NativeScanner');
-    }
 
     newOrder.removeWhere((element) => toRemove.contains(element));
     String item = newOrder.removeAt(oldIndex);
@@ -70,7 +71,6 @@ class _CardsViewState extends State<CardsView> {
   List<Widget> createList(BuildContext context) {
     List<Widget> list = [];
     for (String card in _cardsDataProvider!.cardOrder!) {
-      if (card == 'NativeScanner') continue;
       try {
         list.add(ListTile(
           leading: Icon(Icons.reorder),
@@ -84,14 +84,11 @@ class _CardsViewState extends State<CardsView> {
             activeColor: Theme.of(context).buttonColor,
           ),
         ));
-      }
-      catch (e) {
+      } catch (e) {
         FirebaseCrashlytics.instance.log('error getting $card in profile');
         FirebaseCrashlytics.instance.recordError(
             e, StackTrace.fromString(e.toString()),
-            reason: "Profile/Cards: Failed to load Cards page",
-            fatal: false
-        );
+            reason: "Profile/Cards: Failed to load Cards page", fatal: false);
 
         _cardsDataProvider!.changeInternetStatus(true);
       }

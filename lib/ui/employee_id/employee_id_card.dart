@@ -327,7 +327,6 @@ class _EmployeeIdCardState extends State<EmployeeIdCard> {
         ]));
       }
     } catch (e) {
-      print(e);
       return Container(
         width: double.infinity,
         child: Center(

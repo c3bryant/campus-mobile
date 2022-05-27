@@ -176,7 +176,7 @@ class VentilationConstants {
 /// Maps Card IDs to Card titles
 class CardTitleConstants {
   static const titleMap = {
-    'NativeScanner': 'Scanner',
+    'scanner': 'Scanner',
     'MyStudentChart': 'MyStudentChart',
     'MyUCSDChart': 'MyUCSDChart',
     'student_survey': 'Student Survey',

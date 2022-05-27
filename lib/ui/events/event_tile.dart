@@ -188,7 +188,6 @@ class EventTile extends StatelessWidget {
         ],
       );
     } catch (e) {
-      print(e);
       return Container();
     }
   }

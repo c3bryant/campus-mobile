@@ -15,12 +15,11 @@ class CardsDataProvider extends ChangeNotifier {
 
     // Default card order for native cards
     _cardOrder = [
-      'NativeScanner',
+      'scanner',
       'MyStudentChart',
       'MyUCSDChart',
       'finals',
       'schedule',
-      'student_survey',
       'student_id',
       'employee_id',
       'availability',
@@ -31,14 +30,12 @@ class CardsDataProvider extends ChangeNotifier {
       'news',
       'weather',
       'speed_test',
-      'ventilation',
     ];
 
     // Native student cards
     _studentCards = [
       'finals',
       'schedule',
-      'student_survey',
       'student_id',
     ];
 
@@ -47,7 +44,6 @@ class CardsDataProvider extends ChangeNotifier {
       'MyUCSDChart',
       'staff_info',
       'employee_id',
-      'ventilation',
     ];
 
     for (String card in CardTitleConstants.titleMap.keys.toList()) {

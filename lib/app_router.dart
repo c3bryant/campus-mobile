@@ -3,7 +3,6 @@ import 'package:campus_mobile_experimental/core/models/dining.dart';
 import 'package:campus_mobile_experimental/core/models/dining_menu.dart';
 import 'package:campus_mobile_experimental/core/models/events.dart';
 import 'package:campus_mobile_experimental/core/models/news.dart';
-import 'package:campus_mobile_experimental/core/models/ventilation_locations.dart';
 import 'package:campus_mobile_experimental/ui/availability/manage_availability_view.dart';
 import 'package:campus_mobile_experimental/ui/classes/classes_list.dart';
 import 'package:campus_mobile_experimental/ui/dining/dining_detail_view.dart';
@@ -34,12 +33,6 @@ import 'package:campus_mobile_experimental/ui/profile/cards.dart';
 import 'package:campus_mobile_experimental/ui/profile/notifications.dart';
 import 'package:campus_mobile_experimental/ui/profile/profile.dart';
 import 'package:campus_mobile_experimental/ui/scanner/native_scanner_view.dart';
-import 'package:campus_mobile_experimental/ui/ventilation/ventilation_buildings.dart';
-import 'package:campus_mobile_experimental/ui/ventilation/ventilation_floors.dart';
-import 'package:campus_mobile_experimental/ui/ventilation/ventilation_rooms.dart';
-import 'package:campus_mobile_experimental/ui/wayfinding/beacon_view.dart';
-import 'package:campus_mobile_experimental/ui/wayfinding/bluetooth_logger.dart';
-import 'package:campus_mobile_experimental/ui/wayfinding/wayfinding_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -101,25 +94,6 @@ class Router {
           Provider.of<CustomAppBar>(_).changeTitle(settings.name);
           return ManageAvailabilityView();
         });
-      case RoutePaths.VentilationBuildings:
-        List<VentilationLocationsModel> data =
-            settings.arguments as List<VentilationLocationsModel>;
-        return MaterialPageRoute(builder: (_) {
-          Provider.of<CustomAppBar>(_).changeTitle(settings.name);
-          return VentilationBuildings(data);
-        });
-      case RoutePaths.VentilationFloors:
-        List<BuildingFloor> data = settings.arguments as List<BuildingFloor>;
-        return MaterialPageRoute(builder: (_) {
-          Provider.of<CustomAppBar>(_).changeTitle(settings.name);
-          return VentilationFloors(data);
-        });
-      case RoutePaths.VentilationRooms:
-        List<String> data = settings.arguments as List<String>;
-        return MaterialPageRoute(builder: (_) {
-          Provider.of<CustomAppBar>(_).changeTitle(settings.name);
-          return VentilationRooms(data);
-        });
       case RoutePaths.DiningViewAll:
         return MaterialPageRoute(builder: (_) {
           Provider.of<CustomAppBar>(_).changeTitle(settings.name);
@@ -163,16 +137,6 @@ class Router {
           Provider.of<CustomAppBar>(_).changeTitle(settings.name);
           return NotificationsSettingsView();
         });
-      case RoutePaths.BluetoothPermissionsView:
-        return MaterialPageRoute(builder: (_) {
-          Provider.of<CustomAppBar>(_).changeTitle(settings.name);
-          return AdvancedWayfindingPermission();
-        });
-      case RoutePaths.AutomaticBluetoothLoggerView:
-        return MaterialPageRoute(builder: (_) {
-          Provider.of<CustomAppBar>(_).changeTitle(settings.name);
-          return AutomaticBluetoothLoggerView();
-        });
       case RoutePaths.ClassScheduleViewAll:
         return MaterialPageRoute(builder: (_) {
           Provider.of<CustomAppBar>(_).changeTitle(settings.name);
@@ -209,8 +173,6 @@ class Router {
           Provider.of<CustomAppBar>(_).changeTitle(settings.name);
           return SpotTypesView();
         });
-      case RoutePaths.BeaconView:
-        return MaterialPageRoute(builder: (_) => BeaconView());
       case RoutePaths.ScanditScanner:
         return MaterialPageRoute(builder: (_) => ScanditScanner());
       default:

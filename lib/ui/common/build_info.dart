@@ -51,7 +51,6 @@ class _BuildInfoState extends State<BuildInfo> {
             textAlign: TextAlign.center,
           ));
     } catch (err) {
-      print(err);
       return Container();
     }
   }

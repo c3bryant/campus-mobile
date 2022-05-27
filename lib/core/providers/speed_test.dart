@@ -118,8 +118,8 @@ class SpeedTestProvider extends ChangeNotifier {
           data: formData,
           onSendProgress: _progressCallbackUpload,
           cancelToken: _cancelTokenUpload);
-    } catch (e) {
-      print(e);
+    } catch (err) {
+      print(err);
     }
     _timer.stop();
     notifyListeners();
@@ -137,8 +137,8 @@ class SpeedTestProvider extends ChangeNotifier {
       await dio.download(_speedTestModel!.downloadUrl!, (tempDownload.path),
           onReceiveProgress: _progressCallbackDownload,
           cancelToken: _cancelTokenDownload);
-    } catch (e) {
-      print(e);
+    } catch (err) {
+      print(err);
     }
     _timer.stop();
     notifyListeners();

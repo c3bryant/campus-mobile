@@ -21,7 +21,6 @@ class CardsService {
 
     if (ucsdAffiliation == null) ucsdAffiliation = "";
 
-    /// API Manager Service
     try {
       String cardListEndpoint =
           "https://api-qa.ucsd.edu:8243/mobilecardsservice/v1.0.0/mobilecardslist?version=8&ucsdaffiliation=" +
@@ -41,21 +40,6 @@ class CardsService {
       _isLoading = false;
       return false;
     }
-
-    /// Card Prototyping Service
-    // try {
-    //   String cardPrototypeEndpoint =
-    //       "https://mobile.ucsd.edu/replatform/v1/qa/cards/prototypes/card-prototype--copy-me.json";
-    //   String _response = await _networkHelper.fetchData(cardPrototypeEndpoint);
-    //   _cardsModel = cardsModelFromJson(_response);
-    //   _isLoading = false;
-    //   return true;
-    // } catch (e) {
-    //   print(e);
-    //   _error = e.toString();
-    //   _isLoading = false;
-    //   return false;
-    // }
   }
 
   Future<bool> getNewToken() async {

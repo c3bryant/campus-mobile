@@ -75,7 +75,6 @@ class NetworkHelper {
   // mimicking existing code from React Native versions of campus-mobile
   Future<dynamic> authorizedPublicPost(
       String url, Map<String, String> headers, dynamic body) async {
-    print("SILENTLOGIN: in authorizedPublicPost");
     int retries = 0;
     int waitTime = 0;
     try {
@@ -86,8 +85,6 @@ class NetworkHelper {
       retries++;
       waitTime = SSO_REFRESH_RETRY_INCREMENT;
       while (retries <= SSO_REFRESH_MAX_RETRIES) {
-        print("SILENTLOGIN: Retrying in $waitTime ms...");
-
         // wait for the wait time to elapse
         await Future.delayed(Duration(milliseconds: waitTime));
 
@@ -95,7 +92,6 @@ class NetworkHelper {
         waitTime *= SSO_REFRESH_RETRY_MULTIPLIER;
         // try to log in again
         try {
-          print("SILENTLOGIN: Retrying now...");
           var response = await authorizedPost(url, headers, body);
 
           // no exception thrown, success, return response
