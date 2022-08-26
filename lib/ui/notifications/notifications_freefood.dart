@@ -49,9 +49,6 @@ class _CheckBoxButtonState extends State<FreeFoodNotification> {
   @override
   Widget build(BuildContext context) {
     var isOverCount = _freeFoodDataProvider.isOverCount(messageId);
-
-    // print('messageId "' + messageId + '" isOverCount: ' + isOverCount.toString());
-
     var currCount = _freeFoodDataProvider.count(messageId);
     var countText = currCount == 1
         ? '$currCount student is going'

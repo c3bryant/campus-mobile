@@ -57,14 +57,8 @@ class ShuttleDataProvider extends ChangeNotifier {
         reorderStops(userDataProvider!.userProfileModel!.selectedStops);
       }
 
-      // get closest stop to current user
-      print('Start closest stop calc');
       await calculateClosestStop();
-      print('Calc closest stop done');
-
-      print('Start get arrival');
       await getArrivalInformation();
-      print('End get arrival');
     }
     _isLoading = false;
     notifyListeners();
@@ -119,7 +113,6 @@ class ShuttleDataProvider extends ChangeNotifier {
     if (_userCoords == null ||
         _userCoords!.lon == null ||
         _userCoords!.lat == null) {
-      print("returned because coordinates null");
       return;
     }
 
@@ -132,7 +125,6 @@ class ShuttleDataProvider extends ChangeNotifier {
         closestDistance = getHaversineDistance(
             _userCoords!.lat, _userCoords!.lon, stopLat, stopLong);
         _closestStop = shuttleStop;
-        print('closest=' + shuttleStop.name.toString());
       }
     }
 
@@ -208,7 +200,6 @@ class ShuttleDataProvider extends ChangeNotifier {
   }
 
   set userCoords(Coordinates value) {
-    print("Coordinates set to: $value in shuttle provider");
     _userCoords = value;
   }
 }

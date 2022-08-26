@@ -1,6 +1,6 @@
+import 'package:campus_mobile_experimental/app_constants.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:campus_mobile_experimental/app_constants.dart';
 import 'package:get/get.dart';
 
 class InternetConnectivityProvider extends ChangeNotifier {
@@ -13,17 +13,15 @@ class InternetConnectivityProvider extends ChangeNotifier {
     try {
       var status = await _connectivity.checkConnectivity();
       if (status == ConnectivityResult.none) {
-        print("Connectivity status: offline");
         _noInternet = true;
         notifyListeners();
         _showOfflineAlert(Get.context!);
       } else {
-        print("Connectivity status: online");
         _noInternet = false;
         notifyListeners();
       }
     } catch (e) {
-      print("Encounter $e when monitoring Internet for cards");
+      print(e);
     }
   }
 
@@ -31,12 +29,10 @@ class InternetConnectivityProvider extends ChangeNotifier {
     await initConnectivity();
     _connectivity.onConnectivityChanged.listen((result) async {
       if (result == ConnectivityResult.none) {
-        print("Connectivity status: offline");
         _noInternet = true;
         notifyListeners();
         _showOfflineAlert(Get.context!);
       } else {
-        print("Connectivity status: online");
         _noInternet = false;
         notifyListeners();
       }
@@ -44,7 +40,6 @@ class InternetConnectivityProvider extends ChangeNotifier {
   }
 
   void _showOfflineAlert(BuildContext context) {
-    print("showing the offline alert dialog");
     AlertDialog alert = AlertDialog(
       title: Text(ConnectivityConstants.offlineTitle),
       content: Text(ConnectivityConstants.offlineAlert),

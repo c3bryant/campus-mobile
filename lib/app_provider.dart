@@ -3,6 +3,7 @@ import 'package:campus_mobile_experimental/core/providers/availability.dart';
 import 'package:campus_mobile_experimental/core/providers/bottom_nav.dart';
 import 'package:campus_mobile_experimental/core/providers/cards.dart';
 import 'package:campus_mobile_experimental/core/providers/classes.dart';
+import 'package:campus_mobile_experimental/core/providers/connectivity.dart';
 import 'package:campus_mobile_experimental/core/providers/dining.dart';
 import 'package:campus_mobile_experimental/core/providers/employee_id.dart';
 import 'package:campus_mobile_experimental/core/providers/events.dart';
@@ -22,7 +23,6 @@ import 'package:campus_mobile_experimental/core/providers/student_id.dart';
 import 'package:campus_mobile_experimental/core/providers/user.dart';
 import 'package:campus_mobile_experimental/core/providers/wayfinding.dart';
 import 'package:campus_mobile_experimental/core/providers/weather.dart';
-import 'package:campus_mobile_experimental/core/providers/connectivity.dart';
 import 'package:campus_mobile_experimental/ui/navigator/top.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -96,7 +96,6 @@ List<SingleChildWidget> independentServices = [
   ),
   ChangeNotifierProvider<InternetConnectivityProvider>(
     create: (_) {
-      print("CreateProvider: InternetConnectivityProvider");
       InternetConnectivityProvider _connectivityProvider =
           InternetConnectivityProvider();
       _connectivityProvider.monitorInternet();
@@ -245,7 +244,6 @@ List<SingleChildWidget> dependentServices = [
     var shuttleDataProvider = ShuttleDataProvider();
     return shuttleDataProvider;
   }, update: (_, coordinates, userDataProvider, shuttleDataProvider) {
-    print("UpdateProvider: shuttleDataProvider");
     shuttleDataProvider!.userCoords = coordinates;
     shuttleDataProvider.userDataProvider = userDataProvider;
     shuttleDataProvider.fetchStops(true);

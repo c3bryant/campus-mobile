@@ -295,7 +295,6 @@ class ClassScheduleDataProvider extends ChangeNotifier {
       }
       return listToReturn;
     } catch (err) {
-      print('classes provider err');
       print(err);
       return [];
     }
