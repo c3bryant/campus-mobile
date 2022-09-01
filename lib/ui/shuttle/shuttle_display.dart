@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../../app_styles.dart';
-
 class ShuttleDisplay extends StatelessWidget {
   ShuttleDisplay({Key? key, required this.stop, required this.arrivingShuttles})
       : super(key: key);
@@ -76,9 +74,10 @@ class ShuttleDisplay extends StatelessWidget {
           children: [
             CircleAvatar(
               minRadius: 40,
-              backgroundColor: Colors.transparent,
-              foregroundColor:
-                  arrivingShuttles!.isEmpty ? ucLabelColor : Colors.black,
+              backgroundColor: HexColor(arrivingShuttles!.isEmpty
+                  ? "#CCCCCC"
+                  : arrivingShuttles![0].routeColor!),
+              foregroundColor: Colors.black,
               child: Text(
                 arrivingShuttles!.isEmpty
                     ? "?"
